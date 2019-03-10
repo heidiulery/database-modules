@@ -1,0 +1,119 @@
+1. What data types do each of these values represent?
+
+	1. "A Clockwork Orange"
+
+		varchar
+
+	2. 42
+
+		integer
+
+	3. 09/02/1945
+
+		To save it to the database in this exact format, you would have to use varchar.  The date data type can format YYYY-MM-DD
+
+	4. 98.7
+
+		decimal, numeric, or float could be used depending on the situation.
+
+	5. $15.99
+
+		To save it to the database including the '$', you would have to use varchar.  It is undesirable to save numbers to the database in this fashion because they are no longer able to participate in numeric operations.  It would be better to name the column so it is understood to be a money amount, and store the value as decimal or numeric.
+
+2. Explain when a database would be used. Explain when a text file would be used.
+
+	A text file can be used when only one person is updating information that persists beyond the end of a n application process.  If there are multiple users trying to update information, a database is necessary to avoid locking files or overwriting data.  
+
+3. Describe one difference between SQL and other programming languages.
+
+	SQL is declarative rather than a procedural language.  We only need to tell it what we want to do, not how to do it.
+
+4. In your own words, explain how the pieces of a database system fit together at a high level.
+
+	Database information is stored in a binary file format; these files are not readable by humans.  This makes the database extremely efficient at retrieving and updating data.  Searches can be performed on the database via queries which return easy-to-read data tables. 
+
+5. Explain the meaning of table, row, column, and value.
+
+	+-----+------------+------+
+    | id  | name       | age  |
+	+-----+------------+------+
+	| 1   | Heidi      | 42   |
+    | 2   | Jason      | 44   |
+	| 3   | Gretchen   | 45   |
+	+-----+------------+------+
+	
+	TABLE would include the surrounding box and all information contained inside
+	ROW would include all information on a horiontal line; i.e. 1, 'Heidi', 42
+	COLUMN would include all information on a vertical line; i.e. 'id', 1, 2, 3
+	VALUE would be the information in one cell; i.e. 'Gretchen'
+
+6. List three data types that can be used in a table.
+
+	Integer, varchar, datetime
+
+7. Given this payments table, provide an English description of the following queries and include their results:
+
+	SELECT date, amount
+	FROM payments;
+		This will return all values from the date and amount columns within the payments table.
+		+--------------+------------+
+		| date         | amount     |
+		+--------------+------------+
+		| 2016-05-01   | 1500.00    |
+		| 2016-05-10   | 37.00      |
+		| 2016-05-15   | 124.93     |
+		| 2016-05-23   | 54.72      |
+		+--------------+------------+
+
+	SELECT amount
+	FROM payments
+	WHERE amount > 500;
+		This will return all values from the amount column that are greater than 500 within the payments table.
+		+------------+
+		| amount     |
+		+------------+
+		| 1500.00    |
+		+------------+
+		
+	SELECT * 
+	FROM payments
+	WHERE payee = 'Mega Foods';
+		This will return values from all columns only for the row where the payee is Mega Foods within the payments table.
+		+--------------+---------------+---------+------------+
+		| date         | payee         | amount  | memo       |
+		+--------------+---------------+---------+------------+
+		| 2016-05-15   | Mega Foods    | 124.93  | Groceries  |
+		+--------------+---------------+---------+------------+ 
+
+8. Given this users table, write SQL queries using the following criteria and include the output:
+
+	The email and sign-up date for the user named DeAndre Data.
+		SELECT email, signup
+		FROM users
+		WHERE userid=2;
+			+--------------------+-------------+
+			| email              | signup      |
+			+--------------------+-------------+
+			| datad@comcast.net  | 2008-01-20  |
+			+--------------------+-------------+
+			
+	The user ID for the user with email 'aleesia.algorithm@uw.edu'.
+		SELECT userid
+		FROM users
+		WHERE email='aleesia.algorithm@uw.edu';
+			+--------+
+			| userid |
+			+--------+
+			| 1      |
+			+--------+
+
+	All the columns for the user ID equal to 4.
+		SELECT *
+		FROM users
+		WHERE userid=4;
+			+--------+--------------------+----------------------+---------------+
+			| userid | name               | email                | signup        |
+			+--------+--------------------+----------------------+---------------+
+			| 4      | Brandy Boolean     | bboolean@nasa.gov    | 1999-10-15    |
+			+--------+--------------------+----------------------+---------------+
+
